@@ -48,7 +48,7 @@ const Product = () => {
 
     return (
         <div className="container mx-auto px-4 py-8">
-            <Link to="/" className="text-blue-500 underline mb-4 block">
+            <Link to="/products" className="text-blue-500 underline mb-4 block">
                 ← Back to Products
             </Link>
             <div className="bg-white rounded-lg shadow-md p-6">

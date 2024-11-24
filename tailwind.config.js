@@ -4,7 +4,7 @@ module.exports = {
   theme: {
     fontFamily: {
       'body': ['Poppins', 'sans-serif'],
-      'heading': ['Libre Baskerville', 'serif'],
+      'heading': ['Raleway']
     },
     extend: {
       colors: {

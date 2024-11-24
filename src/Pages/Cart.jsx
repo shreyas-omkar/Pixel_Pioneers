@@ -85,27 +85,31 @@ const Cart = () => {
     };
 
     return (
-        <div className="container mx-auto px-4 py-8">
-            <h1 className="text-2xl font-bold mb-4">Your Cart</h1>
+        <div className="container mx-auto px-4 flex flex-col py-8">
+            <h1 className="text-4xl font-heading self-center font-bold mb-4">Your Cart</h1>
             {cart.length > 0 ? (
-                <div>
+                <div className="mt-8">
                     <ul>
                         {cart.map((item) => (
-                            <li key={item.productId} className="mb-4 flex items-center">
+                            <li key={item.productId} className="mb-4  items-center flex flex-row justify-between">
+                                <div>
                                 <img
                                     src={item.image}
                                     alt={item.name}
                                     className="w-16 h-16 inline"
                                 />
-                                <span className="ml-4">{item.name}</span>
-                                <span className="ml-4">Quantity: {item.quantity}</span>
-                                <span className="ml-4">₹{item.quantity * item.cost}</span>
+                                <span className="ml-8">{item.name}</span>
+                                <span className="ml-8">Quantity: {item.quantity}</span>
+                                <span className="ml-8">₹{item.quantity * item.cost}</span>
+                                </div>
+                                <div>
                                 <button
                                     onClick={() => handleRemoveFromCart(item.productId)}
-                                    className="ml-4 text-red-500 hover:text-red-700"
+                                    className="bg-red-500 mr-4 py-2 px-4 rounded-full text-white hover:text-red-700 border border-red-500 hover:bg-transparent transition-all ease-in-out"
                                 >
                                     Remove
                                 </button>
+                                </div>
                             </li>
                         ))}
                     </ul>
@@ -114,7 +118,7 @@ const Cart = () => {
                     </div>
                     <button
                         onClick={handleCheckout} // Handle checkout button click
-                        className="mt-4 bg-blue-500 text-white px-4 py-2 rounded"
+                        className="self-center text-center flex-col flex text-white mt-4 bg-black font-light px-8 py-3 rounded-full font-body border-[1px] border-black border-solid hover:text-black hover:bg-transparent duration-200 ease-in-out"
                     >
                         Proceed to Checkout
                     </button>

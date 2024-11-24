@@ -2,14 +2,16 @@ import React, { useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { RiMenu2Line as Menu, RiCloseFill as Close, RiShoppingCartFill } from "react-icons/ri";
 import { FaShoppingCart } from "react-icons/fa";
+import { useAuthStore } from '../helper/AuthStore';
 function Navbar() {
     const [showNavbar, setShowNavbar] = useState(false)
+    const { isAuthenticated, logout } = useAuthStore()
+
 
     const handleShowNavbar = () => {
         setShowNavbar(!showNavbar)
     }
 
-    let isAuthenticated = false;
     const handleLogout = async (e) => {
         e.preventDefault()
         await logout()

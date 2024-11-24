@@ -7,11 +7,36 @@ import { BsPersonVcardFill } from "react-icons/bs";
 import { TypeAnimation } from 'react-type-animation';
 import { Toaster, toast } from 'react-hot-toast';
 import axios from "axios";
+import { useFormik } from 'formik';
+import { useAuthStore } from '../helper/AuthStore.js';
+import {RegisterValidate} from '../helper/Validate.js';
+
+
 
 const Register = () => {
-    let isLoading = false;
-    let error = null;
+    const { registerUser, isLoading, error } = useAuthStore(); 
     const navigate = useNavigate();
+
+    useEffect(() => {
+        document.title = "Furry Friend | Register";
+    }, []);
+
+    const formik = useFormik({
+        initialValues: {
+            username: '',
+            fullname: '',
+            email: '',
+            password: '',
+            conf_password: ''
+        },
+        validate: RegisterValidate,
+        validateOnBlur: false,
+        validateOnChange: false,
+        onSubmit: async values => {
+                await registerUser(values, formik, navigate)
+        }
+    });
+
   return (
     <div>
         <div className='w-full px-4 py-10'>
@@ -38,7 +63,7 @@ const Register = () => {
                 <div className=" py-12 right-element flex flex-col items-center justify-center w-full lg:w-1/2 lg:px-8 lg:text-center bg-black p-8 rounded-3xl">
                     <h1 className="font-heading text-3xl overflow-visible md:text-5xl text-white pb-1">Let's Get Started</h1>
                     <h6 className="font-body text-base md:text-lg font-medium text-white pb-6">Give Your Pets A Better Life</h6>
-                    <form onSubmit={(e) => navigate('/thanks')} className='mt-8 w-full lg:flex lg:flex-col lg:items-center lg:justify-center'>
+                    <form onSubmit={formik.handleSubmit} className='mt-8 w-full lg:flex lg:flex-col lg:items-center lg:justify-center'>
                         {/* Username Input */}
                         <div className="input-cover py-5 flex flex-row items-center w-full max-w-md">
                             <IoPersonCircleSharp className='register-icons text-white text-3xl mr-4' />
@@ -48,7 +73,7 @@ const Register = () => {
                                 name="username"
                                 id="Username_Register"
                                 placeholder='Username'
-                                
+                                {...formik.getFieldProps('username')}
                                 required
                             />
                         </div>
@@ -61,6 +86,7 @@ const Register = () => {
                                 name="fullname"
                                 id="Fullname_Register"
                                 placeholder='Full Name'
+                                {...formik.getFieldProps('fullname')}
                                 required
                             />
                         </div>
@@ -73,6 +99,7 @@ const Register = () => {
                                 name="email"
                                 id="Email_Register"
                                 placeholder='Email Id'
+                                {...formik.getFieldProps('email')}
                                 required
                             />
                         </div>
@@ -85,6 +112,7 @@ const Register = () => {
                                 name="password"
                                 id="Password_Register"
                                 placeholder='Password'
+                                {...formik.getFieldProps('password')}
                                 required
                             />
                         </div>
@@ -97,6 +125,7 @@ const Register = () => {
                                 name="conf_password"
                                 id="Conf_Pass"
                                 placeholder='Confirm Password'
+                                {...formik.getFieldProps('conf_password')}
                                 required
                             />
                         </div>

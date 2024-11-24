@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+
+
 li a.active {
     font-weight: 700;
     transition: all 0.1s ease-in-out;

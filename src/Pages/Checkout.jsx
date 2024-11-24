@@ -48,10 +48,10 @@ const Checkout = () => {
     }
 
     return (
-        <div className="container mx-auto px-4 py-8">
-            <h1 className="text-2xl font-bold mb-4">Checkout</h1>
-            <div>
-                <h2 className="font-bold text-xl">Your Products</h2>
+        <div className="container mx-auto flex flex-col px-4 py-8">
+            <h1 className="text-6xl font-heading flex self-center text-center font-bold mb-4">Checkout</h1>
+            <div className="my-10">
+                <h2 className="font-bold font-body text-2xl">Your Products</h2>
                 <ul>
                     {cartItems.map((item) => (
                         <li key={item.productId} className="mb-4 flex items-center">
@@ -60,19 +60,20 @@ const Checkout = () => {
                                 alt={item.name}
                                 className="w-16 h-16 inline"
                             />
-                            <span className="ml-4">{item.name}</span>
-                            <span className="ml-4">Quantity: {item.quantity}</span>
-                            <span className="ml-4">₹{item.quantity * item.cost}</span>
+                            <span className="ml-8 font-bold">{item.name}</span>
+                            <span className="ml-8">Quantity: <b>{item.quantity}</b></span>
+                            <span className="ml-8 font-bold">₹{item.quantity * item.cost}</span>
                         </li>
                     ))}
                 </ul>
 
                 <div className="mt-4">
+                    
                     <h2 className="font-bold text-xl">Total Cost: ₹{totalCost}</h2>
                 </div>
 
                 {/* Checkout Form */}
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit} className="my-8 flex flex-col">
                     <div className="mb-4">
                         <label htmlFor="name" className="block text-sm font-medium text-gray-700">
                             Full Name
@@ -100,16 +101,16 @@ const Checkout = () => {
                             className="mt-1 p-2 w-full border border-gray-300 rounded"
                         />
                     </div>
-
-                    <div className="mt-4 font-bold text-xl">
-                        Total Payable: ₹{totalCost}
+                    <p className="font-body mt-8 text-xs text-grey-600">₹60 (Delivery Charges)</p>
+                    <div className="mb-4 font-bold text-xl">
+                        Total Payable: ₹{totalCost + 60} (In Cash On Arrival)
                     </div>
 
                     <button
                         type="submit"
-                        className="mt-4 bg-green-500 text-white px-4 py-2 rounded"
+                        className="self-center text-center flex-col flex text-white mt-4 bg-black font-light px-8 py-3 rounded-full font-body border-[1px] border-black border-solid hover:text-black hover:bg-transparent duration-200 ease-in-out"
                     >
-                        Place Order
+                        Place Order for ₹{totalCost + 60}
                     </button>
                 </form>
             </div>
